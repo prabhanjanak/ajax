@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="loginApp">
+<head>
+    <title>Login Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body ng-controller="loginAppCntrl">
+    <h2>Login Form</h2>
+    <form name="loginForm" ng-submit="login()" novalidate>
+        <div>
+            <label>Username:</label>
+            <input type="text" ng-model="userName" name="userName" required>
+            <span class="error" ng-show="loginForm.userName.$dirty && loginForm.userName.$invalid">Username is required.</span>
+        </div>
+        <div>
+            <label>Password:</label>
+            <input type="password" ng-model="password" name="password" required>
+            <span class="error" ng-show="loginForm.password.$dirty && loginForm.password.$invalid">Password is required.</span>
+        </div>
+        <button type="submit" ng-disabled="loginForm.$invalid">Login</button>
+    </form>
+    <script>
+        var app = angular.module("loginApp", []);
+        app.controller('loginAppCntrl', function($scope){
+          $scope.login = function(){
+            if($scope.userName == "tharakl" && $scope.password == "12345678") {
+              alert("Login Successful");
+            } else {
+              alert("Incorrect username/password!");
+            }
+          }
+        });
+    </script>
+</body>
+</html>

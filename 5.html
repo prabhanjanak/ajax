@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app="studDetailsApp">
+<head>  
+  <title>Student Details Application</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="studDetailsAppCntrl">
+  <h1>Student Details Application</h1>
+  <input type="number" ng-model="num">
+  <button ng-click="generateData()">Generate</button>
+  <br/><br/>
+  <table border="1" ng-show="studData.length > 0">
+    <tr><th>SLNO</th><th>NAME</th><th>CGPA</th></tr>
+    <tr ng-repeat="s in studData"><td>{{s.SLNO}}</td><td>{{s.NAME}}</td><td>{{s.CGPA}}</td></tr>
+  </table>
+  <br/>Number of Students: {{studData.length}}
+  <script>
+    var app = angular.module("studDetailsApp", []);
+    app.controller("studDetailsAppCntrl", function($scope) {
+      $scope.generateData = () => $scope.studData = Array.from({length: $scope.num}, (_, i) => ({SLNO: i + 1, NAME: `Student-${i + 1}`, CGPA: (Math.random() * 10 + 1).toFixed(2)}));
+    });
+  </script>
+</body>
+</html>

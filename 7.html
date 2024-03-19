@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="userMgmtApp">
+<head>
+  <title>USER MANAGEMENT APPLICATION</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="userMgmtAppCntrl as vm">
+  <h1>USER MANAGEMENT APPLICATION</h1>
+  <div>
+    <input type="text" ng-model="vm.newUserName" placeholder="User Name">
+    <input type="text" ng-model="vm.newUserEmail" placeholder="User Email">
+    <button ng-click="vm.createUser()">Create</button>
+    <br/><br/>
+    <table border="1">
+      <tr><th>SLNO</th><th>NAME</th><th>EMAIL</th><th>READ</th><th>UPDATE</th><th>DELETE</th></tr>
+      <tr ng-repeat="user in vm.users">
+        <td>{{$index+1}}</td>
+        <td><span ng-hide="user.editing">{{user.name}}</span><input type="text" ng-show="user.editing" ng-model="user.name"></td>
+        <td><span ng-hide="user.editing">{{user.email}}</span><input type="text" ng-show="user.editing" ng-model="user.email"></td>
+        <td><button ng-click="user.editing=true">Read</button></td>
+        <td><button ng-click="user.editing=false">Update</button></td>
+        <td><button ng-click="vm.users.splice($index, 1)">Delete</button></td>
+      </tr>
+    </table>
+  </div>
+  <script>
+    var app = angular.module("userMgmtApp", []);
+    app.controller("userMgmtAppCntrl", function() {
+      this.users = [
+        {'name':'Thara K L', 'email':'thara@jnnce.ac.in', 'editing':false},
+        {'name':"Arun Kumar P", 'email':'arunkumarp@jnnce.ac.in', 'editing':false},
+        {'name':'Manasa S M', 'email':'manasasm@jnnce.ac.in', 'editing':false}
+      ];
+      this.createUser = function() {
+        if (this.newUserName && this.newUserEmail) {
+          this.users.push({'name': this.newUserName, 'email': this.newUserEmail, 'editing': false});
+          this.newUserName = '';
+          this.newUserEmail = '';
+        }
+      };
+    });
+  </script>
+</body>
+</html>

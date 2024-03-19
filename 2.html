@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shopping Items Application</title>
+  <script src="angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+<div ng-controller="myCntrl">
+  <h2>Shopping Application</h2>
+  <h4>List of Shopping Items</h4>
+  <ol>
+    <li ng-repeat="item in shoppingItems">{{item}}</li>
+  </ol>
+  <div>
+    Enter Item: <input type="text" ng-model="newItem">
+    <button ng-click="shoppingItems.push(newItem); newItem = ''">Add</button>
+  </div>
+  <div>
+    Select Item: 
+    <select ng-model="selectItem" ng-options="item for item in shoppingItems"></select>
+    <button ng-click="shoppingItems.splice(shoppingItems.indexOf(selectItem), 1)">Remove</button>
+  </div>
+</div>
+<script>
+  var app = angular.module("myApp", []);
+  app.controller("myCntrl", function($scope) {
+    $scope.shoppingItems = ['Apple', 'Mango', 'Banana', 'Grapes'];
+  });
+</script>
+</body>
+</html>

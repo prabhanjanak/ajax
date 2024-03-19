@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="mySqFct">
+<head>
+  <title>AJS Square and Factorial Application</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="mySqFctCntrl">
+<h3>Square and Factorial Calculator</h3>
+  <input type="number" ng-model="num">
+  <button ng-click="compute('factorial')">Factorial</button>
+  <button ng-click="compute('square')">Square</button>
+  <br/>
+  {{result}}
+<script>
+var app = angular.module("mySqFct", []);
+app.controller("mySqFctCntrl", function($scope) {
+  $scope.compute = function(operation) {
+    $scope.result = operation === 'factorial' ? factorial($scope.num) : $scope.num * $scope.num;
+  };
+
+  function factorial(n) {
+    return n <= 1 ? 1 : n * factorial(n - 1);
+  }
+});
+</script>
+</body>
+</html>
