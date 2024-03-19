@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AJS Simple Calculator</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-app="calcApp">
+  <h1>Angular JS Simple Calculator</h1>
+  <div ng-controller="calcCntrl">
+    <input type="number" ng-model="num1">
+    <select ng-model="operator">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="*">*</option>
+      <option value="/">/</option>
+    </select>
+    <input type="number" ng-model="num2">
+    <button ng-click="compute()">Compute</button>
+    <p>Result: {{result}}</p>
+  </div>
+  <script>
+    var app = angular.module("calcApp", []);
+    app.controller("calcCntrl", function($scope) {
+      $scope.compute = function() {
+        switch ($scope.operator) {
+          case '+':
+            $scope.result = $scope.num1 + $scope.num2;
+            break;
+          case '-':
+            $scope.result = $scope.num1 - $scope.num2;
+            break;
+          case '*':
+            $scope.result = $scope.num1 * $scope.num2;
+            break;
+          case '/':
+            if ($scope.num2 !== 0) {
+              $scope.result = $scope.num1 / $scope.num2;
+            } else {
+              $scope.result = 'Divide by zero error';
+            }
+            break;
+        }
+      };
+    });
+  </script>
+</body>
+</html>
